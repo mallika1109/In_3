@@ -1,0 +1,10 @@
+name: redis
+replicaCount: 1
+image:
+  repository: redis
+  tag: "6-alpine"
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 6379
+resources: {}
