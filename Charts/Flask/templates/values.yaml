@@ -1,0 +1,25 @@
+name: flask-app
+replicaCount: 1
+
+image:
+  repository: jinitus/flask-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 5000
+  nodePort: 30080   # make sure this port is open in EC2 Security Group
+
+env:
+  PGDB_HOST: "postgresql"   # Service name from PostgreSQL chart
+  PGDB_PORT: "5432"
+  PGDB_NAME: "mydb"        # must match postgres auth.database
+  PGDB_USER: "myuser"      # must match postgres auth.username
+  REDIS_HOST: "redis"       # Service name from Redis chart
+  REDIS_PORT: "6379"
+
+pgPassword: "SuperSecret123"  # must match postgres auth.password
+
+resources: {}
